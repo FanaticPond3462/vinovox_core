@@ -93,6 +93,9 @@ uuid = "1.6.1"
 voicevox_core = { path = "crates/voicevox_core" }
 windows = "0.43.0"
 zip = "0.6.3"
+openvino = "0.7.2"
+openvino-sys = "0.7.2"
+openvino-finder = "0.7.2"
 
 [workspace.dependencies.voicevox-ort]
 git = "https://github.com/VOICEVOX/ort.git"
