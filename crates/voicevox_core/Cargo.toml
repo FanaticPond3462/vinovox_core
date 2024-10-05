@@ -6,7 +6,7 @@ publish.workspace = true
 rust-version.workspace = true
 
 [package.metadata.docs.rs]
-features = ["load-onnxruntime", "link-onnxruntime", "load-openvino"]
+features = ["load-onnxruntime", "link-onnxruntime"]
 rustdoc-args = ["--cfg", "docsrs"]
 
 # rustdocを参照
@@ -14,7 +14,6 @@ rustdoc-args = ["--cfg", "docsrs"]
 default = []
 load-onnxruntime = ["voicevox-ort/load-dynamic"]
 link-onnxruntime = []
-load-openvino = []
 
 [dependencies]
 anyhow.workspace = true
@@ -54,9 +53,6 @@ tracing.workspace = true
 uuid = { workspace = true, features = ["v4", "serde"] }
 voicevox-ort = { workspace = true, features = ["download-binaries", "__init-for-voicevox"] }
 voicevox_core_macros = { path = "../voicevox_core_macros" }
-openvino-sys = { workspace = true }
-openvino-finder = { workspace = true }
-openvino.workspace = true
 
 [dev-dependencies]
 heck.workspace = true
