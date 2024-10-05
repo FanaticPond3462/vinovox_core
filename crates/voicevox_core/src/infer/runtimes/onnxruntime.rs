@@ -18,7 +18,8 @@ use duplicate::duplicate_item;
 use ndarray::{Array, Dimension};
 use ort::{
     CPUExecutionProvider, CUDAExecutionProvider, DirectMLExecutionProvider, ExecutionProvider as _,
-    GraphOptimizationLevel, PrimitiveTensorElementType, TensorElementType, ValueType,
+    GraphOptimizationLevel, OpenVINOExecutionProvider, PrimitiveTensorElementType,
+    TensorElementType, ValueType,
 };
 
 use crate::{
@@ -49,7 +50,7 @@ impl InferenceRuntime for self::blocking::Onnxruntime {
             let cuda = CUDAExecutionProvider::default().is_available()?;
             let dml = DirectMLExecutionProvider::default().is_available()?;
 
-            ensure!(cpu, "missing `CPUExecutionProvider`");
+            ensure!(cpu, "missing `OpenVINOExecutionProvider`");
 
             Ok(SupportedDevices {
                 cpu: true,
@@ -80,11 +81,13 @@ impl InferenceRuntime for self::blocking::Onnxruntime {
         Vec<ParamInfo<OutputScalarKind>>,
     )> {
         let mut builder = ort::Session::builder()?
-            .with_optimization_level(GraphOptimizationLevel::Level1)?
+            .with_optimization_level(GraphOptimizationLevel::Level3)?
             .with_intra_threads(options.cpu_num_threads.into())?;
 
         match options.device {
-            DeviceSpec::Cpu => {}
+            DeviceSpec::Cpu => {
+                OpenVINOExecutionProvider::default().register(&builder)?;
+            }
             DeviceSpec::Gpu(GpuSpec::Cuda) => {
                 CUDAExecutionProvider::default().register(&builder)?;
             }
