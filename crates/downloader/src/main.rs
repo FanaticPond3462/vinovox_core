@@ -38,7 +38,7 @@ const DEFAULT_OUTPUT: &str = if cfg!(windows) {
 };
 
 const LIB_NAME: &str = "voicevox_core";
-const DEFAULT_CORE_REPO: &str = "VOICEVOX/voicevox_core";
+const DEFAULT_CORE_REPO: &str = "FanaticPond3462/vinovox_core";
 const DEFAULT_ONNXRUNTIME_BUILDER_REPO: &str = "VOICEVOX/onnxruntime-builder";
 const DEFAULT_ADDITIONAL_LIBRARIES_REPO: &str = "VOICEVOX/voicevox_additional_libraries";
 
