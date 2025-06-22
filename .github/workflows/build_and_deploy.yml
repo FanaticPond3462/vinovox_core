@@ -154,6 +154,22 @@ jobs:
           includes=$(echo "$includes" | jq -c '[.[] | del(.can_skip_in_simple_test)]')
           echo "includes=${includes}" >> "$GITHUB_OUTPUT"
 
+          git clone https://github.com/openvinotoolkit/openvino.git 
+
+          cd openvino 
+
+          git submodule update --init --recursive 
+
+          sudo ./install_build_dependencies.sh 
+
+          mkdir build && cd build 
+
+          cmake -DCMAKE_BUILD_TYPE=Release .. 
+
+          cmake --build . --parallel 8
+
+          echo "OPENVINO_BUILD_DIR=$(pwd)" >> $GITHUB_ENV
+
   build_and_deploy:
     needs: config
     environment: ${{ inputs.code_signing && 'code_signing' || '' }} # コード署名用のenvironment
