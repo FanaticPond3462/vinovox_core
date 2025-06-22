@@ -74,7 +74,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Install OpenVINO
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
           unzip w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip -d $HOME/openvino
           echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
       - run: cargo clippy -v --features load-onnxruntime --tests -- -D clippy::all -D warnings --no-deps
@@ -98,7 +98,7 @@ jobs:
           key: "cargo-unit-test-cache"
       - name: Install OpenVINO
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
           unzip w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip -d $HOME/openvino
           echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
       - name: Run cargo unit test
@@ -152,19 +152,19 @@ jobs:
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'windows')
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
           unzip w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip -d $HOME/openvino
           echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'ubuntu')
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
           tar -xf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'macos')
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
           tar -xf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
       - name: Run cargo integration test (load-onnxruntime)
         run: RUST_BACKTRACE=full cargo test --test "*" -v -- --include-ignored
@@ -228,19 +228,19 @@ jobs:
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'windows')
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
           unzip w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip -d $HOME/openvino
           echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'ubuntu')
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
           tar -xf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'macos')
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
           tar -xf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
       - name: build voicevox_core_c_api
         run: cargo build -p voicevox_core_c_api --features load-onnxruntime -v
@@ -290,7 +290,7 @@ jobs:
         uses: taiki-e/install-action@cargo-binstall
       - name: Install OpenVINO
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
           unzip w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip -d $HOME/openvino
           echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
       - name: build voicevox_core_c_api
@@ -338,19 +338,19 @@ jobs:
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'windows')
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
           unzip w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip -d $HOME/openvino
           echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'ubuntu')
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
           tar -xf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'macos')
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
           tar -xf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
       - run: |
           pip install --upgrade poetry
@@ -398,19 +398,19 @@ jobs:
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'windows')
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
           unzip w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip -d $HOME/openvino
           echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'ubuntu')
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
           tar -xf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'macos')
         run: |
-          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
           tar -xf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
       - name: 必要なDLLをコピーしてビルド
         working-directory: crates/voicevox_core_java_api
