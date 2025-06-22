@@ -229,13 +229,14 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          tar -xf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz $HOME/openvino
-          echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
+          
+          mkdir -p $HOME/openvino && tar -xf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
+          echo "OPENVINO_DIR=$HOME/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64" >> $GITHUB_ENV
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'macos')
         run: |
           curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          tar -xf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz $HOME/openvino
+          mkdir -p $HOME/openvino && tar -xf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
       - name: build voicevox_core_c_api
         run: cargo build -p voicevox_core_c_api --features load-onnxruntime -v
