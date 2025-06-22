@@ -17,7 +17,7 @@ use anyhow::{anyhow, bail, ensure};
 use duplicate::duplicate_item;
 use ndarray::{Array, Dimension};
 use ort::{
-    CPUExecutionProvider, CUDAExecutionProvider, DirectMLExecutionProvider, ExecutionProvider as _,
+    OpenVINOExecutionProvider, CUDAExecutionProvider, DirectMLExecutionProvider, ExecutionProvider as _,
     GraphOptimizationLevel, PrimitiveTensorElementType, TensorElementType, ValueType,
 };
 
@@ -46,7 +46,7 @@ impl InferenceRuntime for self::blocking::Onnxruntime {
 
     fn supported_devices(&self) -> crate::Result<SupportedDevices> {
         (|| {
-            let cpu = CPUExecutionProvider::default().is_available()?;
+            let cpu = OpenVINOExecutionProvider::default().is_available()?;
             let cuda = CUDAExecutionProvider::default().is_available()?;
             let dml = DirectMLExecutionProvider::default().is_available()?;
 
