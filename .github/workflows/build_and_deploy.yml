@@ -154,8 +154,6 @@ jobs:
           includes=$(echo "$includes" | jq -c '[.[] | del(.can_skip_in_simple_test)]')
           echo "includes=${includes}" >> "$GITHUB_OUTPUT"
 
-          vcpkg install openvino
-
   build_and_deploy:
     needs: config
     environment: ${{ inputs.code_signing && 'code_signing' || '' }} # コード署名用のenvironment
@@ -186,6 +184,23 @@ jobs:
         if: endsWith(matrix.target, '-linux-android')
         with:
           ndk-version: r25b
+      - name: Install OpenVINO
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
+          unzip w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip -d $HOME/openvino
+          echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
+      - name: Install OpenVINO
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
+          tar -xf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
+          echo "OPENVINO_DIR=$HOME/openvino" >> $GITHUB_ENV
+      - name: Install OpenVINO
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          wget https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
+          tar -xf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
       - name: Set path for android
         if: endsWith(matrix.target, '-linux-android')
         run: |
