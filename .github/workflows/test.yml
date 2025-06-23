@@ -162,14 +162,14 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          mkdir -p $HOME/openvino && tar -xf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
+          mkdir -p $HOME/openvino && tar -xzvf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_INSTALL_DIR=$HOME/openvino" >> $GITHUB_ENV
           echo "PATH=$PATH;$HOME/openvino/bin" >> $GITHUB_ENV
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'macos')
         run: |
           curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          mkdir -p $HOME/openvino && tar -xf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
+          mkdir -p $HOME/openvino && tar -xzvf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
           echo "OPENVINO_INSTALL_DIR=$HOME/openvino" >> $GITHUB_ENV
           echo "PATH=$PATH;$HOME/openvino/bin" >> $GITHUB_ENV
       - name: Show environment variables 
@@ -237,14 +237,14 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          mkdir -p $HOME/openvino && tar -xf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
+          mkdir -p $HOME/openvino && tar -xzvf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_INSTALL_DIR=$HOME/openvino" >> $GITHUB_ENV
           echo "PATH=$PATH;$HOME/openvino/bin" >> $GITHUB_ENV
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'macos')
         run: |
           curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          mkdir -p $HOME/openvino && tar -xf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
+          mkdir -p $HOME/openvino && tar -xzvf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_INSTALL_DIR=$HOME/openvino" >> $GITHUB_ENV
           echo "PATH=$PATH;$HOME/openvino/bin" >> $GITHUB_ENV
       - name: Show environment variables 
@@ -356,14 +356,14 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          mkdir -p $HOME/openvino && tar -xf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
+          mkdir -p $HOME/openvino && tar -xzvf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_INSTALL_DIR=$HOME/openvino" >> $GITHUB_ENV
           echo "PATH=$PATH;$HOME/openvino/bin" >> $GITHUB_ENV
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'macos')
         run: |
           curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          mkdir -p $HOME/openvino && tar -xf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
+          mkdir -p $HOME/openvino && tar -xzvf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_INSTALL_DIR=$HOME/openvino" >> $GITHUB_ENV
           echo "PATH=$PATH;$HOME/openvino/bin" >> $GITHUB_ENV
       - run: |
@@ -422,14 +422,14 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          mkdir -p $HOME/openvino && tar -xf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
+          mkdir -p $HOME/openvino && tar -xzvf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_INSTALL_DIR=$HOME/openvino" >> $GITHUB_ENV
           echo "PATH=$PATH;$HOME/openvino/bin" >> $GITHUB_ENV
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'macos')
         run: |
           curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          mkdir -p $HOME/openvino && tar -xf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
+          mkdir -p $HOME/openvino && tar -xzvf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_INSTALL_DIR=$HOME/openvino" >> $GITHUB_ENV
           echo "PATH=$PATH;$HOME/openvino/bin" >> $GITHUB_ENV
       - name: Show environment variables 
