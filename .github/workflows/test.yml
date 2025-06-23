@@ -83,7 +83,7 @@ jobs:
       - run: RUST_BACKTRACE=1 cargo clippy -v --features load-onnxruntime -- -D clippy::all -D warnings --no-deps
       - run: RUST_BACKTRACE=1 cargo clippy -v -p voicevox_core -p voicevox_core_c_api --features link-onnxruntime --tests -- -D clippy::all -D warnings --no-deps
       - run: RUST_BACKTRACE=1 cargo clippy -v -p voicevox_core -p voicevox_core_c_api --features link-onnxruntime -- -D clippy::all -D warnings --no-deps
-      - run: RUST_BACKTRACE=1cargo fmt -- --check
+      - run: RUST_BACKTRACE=1 cargo fmt -- --check
 
   rust-unit-test:
     runs-on: windows-latest
@@ -236,13 +236,13 @@ jobs:
         if: startsWith(matrix.os, 'ubuntu')
         run: |
           curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          tar -xzvf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
+          tar -xzvf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME
           echo "OPENVINO_INSTALL_DIR=$HOME/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64" >> $GITHUB_ENV
       - name: Install OpenVINO
         if: startsWith(matrix.os, 'macos')
         run: |
           curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          tar -xzvf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
+          tar -xzvf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME
           echo "OPENVINO_INSTALL_DIR=$HOME/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64" >> $GITHUB_ENV
       - name: Show environment variables 
         run: env
@@ -293,12 +293,13 @@ jobs:
       - name: Install cargo-binstall
         uses: taiki-e/install-action@cargo-binstall
       - name: Install OpenVINO
+        shell: bash
         run: |
           curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
-
           unzip w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip -d $HOME
           echo "OPENVINO_INSTALL_DIR=$HOME/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64" >> $GITHUB_ENV
-
+      - name: Show environment variables 
+        run: env
       - name: build voicevox_core_c_api
         run: cargo build -p voicevox_core_c_api --features load-onnxruntime -v
       - name: 必要なfileをexampleのディレクトリに移動させる

@@ -17,8 +17,9 @@ use anyhow::{anyhow, bail, ensure};
 use duplicate::duplicate_item;
 use ndarray::{Array, Dimension};
 use ort::{
-    OpenVINOExecutionProvider, CUDAExecutionProvider, DirectMLExecutionProvider, ExecutionProvider as _,
-    GraphOptimizationLevel, PrimitiveTensorElementType, TensorElementType, ValueType,
+    CUDAExecutionProvider, DirectMLExecutionProvider, ExecutionProvider as _,
+    GraphOptimizationLevel, OpenVINOExecutionProvider, PrimitiveTensorElementType,
+    TensorElementType, ValueType,
 };
 
 use crate::error::ErrorRepr;
@@ -50,10 +51,12 @@ impl InferenceRuntime for self::blocking::Onnxruntime {
             let cuda = CUDAExecutionProvider::default().is_available()?;
             let dml = DirectMLExecutionProvider::default().is_available()?;
 
-            ensure!(cpu, "missing `CPUExecutionProvider`");
+            if !cpu {
+                tracing::warn!("OpenVINOExecutionProvider is not available");
+            }
 
             Ok(SupportedDevices {
-                cpu: true,
+                cpu,
                 cuda,
                 dml,
             })
