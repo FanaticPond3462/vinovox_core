@@ -205,6 +205,8 @@ jobs:
           mkdir -p $HOME/openvino && tar -xf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_INSTALL_DIR=$HOME/openvino" >> $GITHUB_ENV
           echo "PATH=$PATH;$HOME/openvino/bin" >> $GITHUB_ENV
+      - name: Show environment variables 
+        run: env
       - name: Set path for android
         if: endsWith(matrix.target, '-linux-android')
         run: |

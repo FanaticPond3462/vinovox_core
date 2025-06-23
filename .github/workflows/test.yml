@@ -172,6 +172,8 @@ jobs:
           mkdir -p $HOME/openvino && tar -xf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
           echo "OPENVINO_INSTALL_DIR=$HOME/openvino" >> $GITHUB_ENV
           echo "PATH=$PATH;$HOME/openvino/bin" >> $GITHUB_ENV
+      - name: Show environment variables 
+        run: env
       - name: Run cargo integration test (load-onnxruntime)
         run: RUST_BACKTRACE=full cargo test --test "*" -v -- --include-ignored
 
@@ -245,6 +247,8 @@ jobs:
           mkdir -p $HOME/openvino && tar -xf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_INSTALL_DIR=$HOME/openvino" >> $GITHUB_ENV
           echo "PATH=$PATH;$HOME/openvino/bin" >> $GITHUB_ENV
+      - name: Show environment variables 
+        run: env
       - name: build voicevox_core_c_api
         run: cargo build -p voicevox_core_c_api --features load-onnxruntime -v
       - name: 必要なfileをunix用exampleのディレクトリに移動させる
@@ -365,6 +369,8 @@ jobs:
       - run: |
           pip install --upgrade poetry
           poetry install --with dev --with test
+      - name: Show environment variables 
+        run: env
       - run: cargo build -p test_util -v # build scriptにより/crates/test_util/data/の生成
       - run: poetry run maturin build --locked
       - run: poetry run maturin develop --locked
@@ -426,6 +432,8 @@ jobs:
           mkdir -p $HOME/openvino && tar -xf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C $HOME/openvino
           echo "OPENVINO_INSTALL_DIR=$HOME/openvino" >> $GITHUB_ENV
           echo "PATH=$PATH;$HOME/openvino/bin" >> $GITHUB_ENV
+      - name: Show environment variables 
+        run: env
       - name: 必要なDLLをコピーしてビルド
         working-directory: crates/voicevox_core_java_api
         run: |
