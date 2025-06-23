@@ -13,7 +13,7 @@
 
 use std::{fmt::Debug, sync::Arc, vec};
 
-use anyhow::{anyhow, bail, ensure};
+use anyhow::{anyhow, bail};
 use duplicate::duplicate_item;
 use ndarray::{Array, Dimension};
 use ort::{
@@ -55,11 +55,7 @@ impl InferenceRuntime for self::blocking::Onnxruntime {
                 tracing::warn!("OpenVINOExecutionProvider is not available");
             }
 
-            Ok(SupportedDevices {
-                cpu,
-                cuda,
-                dml,
-            })
+            Ok(SupportedDevices { cpu, cuda, dml })
         })()
         .map_err(ErrorRepr::GetSupportedDevices)
         .map_err(Into::into)
