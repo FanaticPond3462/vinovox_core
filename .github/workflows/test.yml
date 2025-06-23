@@ -170,7 +170,7 @@ jobs:
         run: |
           curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
           tar -xzvf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C "$HOME"
-          echo "OPENVINO_INSTALL_DIR=$HOME/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64" >> $GITHUB_ENV"
+          echo "OPENVINO_INSTALL_DIR=$HOME/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64" >> "$GITHUB_ENV"
       - name: Show environment variables 
         run: env
       - name: Run cargo integration test (load-onnxruntime)
@@ -301,6 +301,7 @@ jobs:
       - name: Show environment variables 
         run: env
       - name: build voicevox_core_c_api
+        shell: bash
         run: cargo build -p voicevox_core_c_api --features load-onnxruntime -v
       - name: 必要なfileをexampleのディレクトリに移動させる
         shell: bash

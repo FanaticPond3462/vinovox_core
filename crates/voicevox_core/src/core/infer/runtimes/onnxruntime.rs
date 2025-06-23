@@ -13,12 +13,12 @@
 
 use std::{fmt::Debug, sync::Arc, vec};
 
-use anyhow::{anyhow, bail};
+use anyhow::{anyhow, bail, ensure};
 use duplicate::duplicate_item;
 use ndarray::{Array, Dimension};
 use ort::{
     CUDAExecutionProvider, DirectMLExecutionProvider, ExecutionProvider as _,
-    GraphOptimizationLevel, OpenVINOExecutionProvider, PrimitiveTensorElementType,
+    GraphOptimizationLevel, OpenVINOExecutionProvider, CPUExecutionProvider, PrimitiveTensorElementType,
     TensorElementType, ValueType,
 };
 
@@ -47,12 +47,14 @@ impl InferenceRuntime for self::blocking::Onnxruntime {
 
     fn supported_devices(&self) -> crate::Result<SupportedDevices> {
         (|| {
+            let defalut = CPUExecutionProvider::default().is_available()?;
+            ensure!(defalut, "CPUExecutionProvider is not available");
             let cpu = OpenVINOExecutionProvider::default().is_available()?;
             let cuda = CUDAExecutionProvider::default().is_available()?;
             let dml = DirectMLExecutionProvider::default().is_available()?;
 
-            if !cpu {
-                tracing::warn!("OpenVINOExecutionProvider is not available");
+            if cpu {
+                tracing::info!("OpenVINOExecutionProvider is available!");
             }
 
             Ok(SupportedDevices { cpu, cuda, dml })
@@ -84,7 +86,12 @@ impl InferenceRuntime for self::blocking::Onnxruntime {
             .with_intra_threads(options.cpu_num_threads.into())?;
 
         match options.device {
-            DeviceSpec::Cpu => {}
+            DeviceSpec::Cpu => {
+                let supported_devices_availabilities = Self::supported_devices(self)?;
+                if supported_devices_availabilities.cpu {
+                    OpenVINOExecutionProvider::default().register(&builder)?;
+                }
+            }
             DeviceSpec::Gpu(GpuSpec::Cuda) => {
                 CUDAExecutionProvider::default().register(&builder)?;
             }
