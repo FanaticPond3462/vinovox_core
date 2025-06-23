@@ -132,5 +132,5 @@ lto = true
 codegen-units = 1
 strip = true
 
-[advisories]
-allow-build-scripts = ["openvino-sys"]
+[bans.build]
+allow-build-scripts = [{ name = "openvino-sys" }]

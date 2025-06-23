@@ -72,6 +72,3 @@ windows = { workspace = true, features = ["Win32_Foundation", "Win32_Graphics_Dx
 [lints.rust]
 unsafe_code = "allow" # WindowsのGPU情報表示に、Win32を利用
 rust_2018_idioms = "warn"
-
-[advisories]
-allow-build-scripts = ["openvino-sys"]
