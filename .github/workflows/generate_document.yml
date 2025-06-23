@@ -54,10 +54,7 @@ jobs:
       - name: cp docs/ghpages/apis/index.html
         run: cp docs/ghpages/apis/index.html public/apis/
       - name: Install OpenVINO
-        run: |
-          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          tar -xzvf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C "$HOME"
-          echo "OPENVINO_INSTALL_DIR=$HOME/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64" >> "$GITHUB_ENV"
+        uses: ./.github/actions/install-openvino
       - name: Generate rustdoc
         run: |
           cargo +${{ steps.docsrs-rust-version.outputs.rust-toolchain }} docs-rs -p voicevox_core
@@ -77,7 +74,7 @@ jobs:
           (cd crates/voicevox_core_java_api && ./gradlew javadoc)
           mkdir -p public/apis/java_api
           cp -r crates/voicevox_core_java_api/lib/build/docs/javadoc/* public/apis/java_api
-      - name: Uplaod api document
+      - name: Upload api document
         uses: actions/upload-pages-artifact@v3
         if: ${{ github.ref_name == 'main' }}
         with:
