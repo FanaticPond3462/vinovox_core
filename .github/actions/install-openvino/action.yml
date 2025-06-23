@@ -28,9 +28,9 @@ runs:
         tar -xzvf l_openvino_toolkit_ubuntu20_2024.3.0.16041.1e3b88e4e3f_arm64.tgz -C "$HOME"
         echo "OPENVINO_INSTALL_DIR=$HOME/l_openvino_toolkit_ubuntu20_2024.3.0.16041.1e3b88e4e3f_arm64" >> "$GITHUB_ENV"
 
-
+    
     - name: Install OpenVINO (macOS - x64)
-      if: startsWith(runner.os, 'macOS') && runner.arch == 'X64'
+      if: startsWith(runner.os, 'macOS') && runner.arch == 'ARM64' # Hacky trick 
       shell: bash
       run: |
         curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
@@ -38,7 +38,7 @@ runs:
         echo "OPENVINO_INSTALL_DIR=$HOME/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64" >> "$GITHUB_ENV"
 
     - name: Install OpenVINO (macOS - ARM64)
-      if: startsWith(runner.os, 'macOS') && runner.arch == 'ARM64'
+      if: startsWith(runner.os, 'macOS') && runner.arch == 'X64' # Hacky trick 
       shell: bash
       run: |
         curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_arm64.tgz
