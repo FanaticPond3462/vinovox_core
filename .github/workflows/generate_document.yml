@@ -53,6 +53,11 @@ jobs:
         run: mkdir -p public/apis/c_api
       - name: cp docs/ghpages/apis/index.html
         run: cp docs/ghpages/apis/index.html public/apis/
+      - name: Install OpenVINO
+        run: |
+          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
+          tar -xzvf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C "$HOME"
+          echo "OPENVINO_INSTALL_DIR=$HOME/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64" >> "$GITHUB_ENV"
       - name: Generate rustdoc
         run: |
           cargo +${{ steps.docsrs-rust-version.outputs.rust-toolchain }} docs-rs -p voicevox_core
