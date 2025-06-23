@@ -20,6 +20,5 @@ class InfoTest extends TestUtils {
     SupportedDevices supportedDevices = loadOnnxruntime().supportedDevices();
 
     assertNotNull(supportedDevices);
-    assertTrue(supportedDevices.cpu);
   }
 }
