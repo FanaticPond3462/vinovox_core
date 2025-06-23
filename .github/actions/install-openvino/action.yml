@@ -47,4 +47,4 @@ runs:
 
     - name: Show OpenVINO environment variable
       shell: bash
-      run: echo "OpenVINO install directory is: $OPENVINO_INSTALL_DIR"
+      run: env
