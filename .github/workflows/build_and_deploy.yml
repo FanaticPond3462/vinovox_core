@@ -56,15 +56,6 @@ jobs:
               "can_skip_in_simple_test": false
             },
             {
-              "os": "windows-2022",
-              "target": "i686-pc-windows-msvc",
-              "artifact_name": "windows-x86",
-              "c_release_format": "plain-cdylib",
-              "python_whl": true,
-              "java": true,
-              "can_skip_in_simple_test": true
-            },
-            {
               "os": "ubuntu-22.04",
               "target": "x86_64-unknown-linux-gnu",
               "artifact_name": "linux-x64",
@@ -185,25 +176,7 @@ jobs:
         with:
           ndk-version: r25b
       - name: Install OpenVINO
-        if: startsWith(matrix.os, 'windows')
-        run: |
-          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
-          unzip w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip -d "$HOME"
-          echo "OPENVINO_INSTALL_DIR=$HOME/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64" >> "$GITHUB_ENV"
-      - name: Install OpenVINO
-        if: startsWith(matrix.os, 'ubuntu')
-        run: |
-          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          tar -xzvf l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C "$HOME"
-          echo "OPENVINO_INSTALL_DIR=$HOME/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64" >> "$GITHUB_ENV"
-      - name: Install OpenVINO
-        if: startsWith(matrix.os, 'macos')
-        run: |
-          curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
-          tar -xzvf m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz -C "$HOME"
-          echo "OPENVINO_INSTALL_DIR=$HOME/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64" >> "$GITHUB_ENV"
-      - name: Show environment variables 
-        run: env
+        uses: ./.github/actions/install-openvino
       - name: Set path for android
         if: endsWith(matrix.target, '-linux-android')
         run: |
