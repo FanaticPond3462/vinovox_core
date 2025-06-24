@@ -5,7 +5,7 @@ runs:
   using: "composite"
   steps:
     - name: Install OpenVINO (Windows - x64)
-      if: startsWith(runner.os, 'Windows') && runner.arch == 'X64'
+      if: startsWith(runner.os, 'Windows') && ( (matrix.artifact_name && contains(matrix.artifact_name, 'x64')) || (!matrix.artifact_name && runner.arch == 'X64') )
       shell: bash
       run: |
         curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/windows/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64.zip
@@ -13,7 +13,7 @@ runs:
         echo "OPENVINO_INSTALL_DIR=$HOME/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64" >> "$GITHUB_ENV"
 
     - name: Install OpenVINO (Ubuntu - x64)
-      if: startsWith(runner.os, 'Linux') && runner.arch == 'X64'
+      if: startsWith(runner.os, 'Linux') && ( (matrix.artifact_name && contains(matrix.artifact_name, 'x64')) || (!matrix.artifact_name && runner.arch == 'X64') )
       shell: bash
       run: |
         curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
@@ -21,16 +21,15 @@ runs:
         echo "OPENVINO_INSTALL_DIR=$HOME/l_openvino_toolkit_ubuntu22_2024.3.0.16041.1e3b88e4e3f_x86_64" >> "$GITHUB_ENV"
 
     - name: Install OpenVINO (Ubuntu - ARM64)
-      if: startsWith(runner.os, 'Linux') && runner.arch == 'ARM64'
+      if: startsWith(runner.os, 'Linux') && ( (matrix.artifact_name && contains(matrix.artifact_name, 'arm64')) || (!matrix.artifact_name && runner.arch == 'ARM64') )
       shell: bash
       run: |
         curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/linux/l_openvino_toolkit_ubuntu20_2024.3.0.16041.1e3b88e4e3f_arm64.tgz
         tar -xzvf l_openvino_toolkit_ubuntu20_2024.3.0.16041.1e3b88e4e3f_arm64.tgz -C "$HOME"
         echo "OPENVINO_INSTALL_DIR=$HOME/l_openvino_toolkit_ubuntu20_2024.3.0.16041.1e3b88e4e3f_arm64" >> "$GITHUB_ENV"
 
-    
     - name: Install OpenVINO (macOS - x64)
-      if: startsWith(runner.os, 'macOS') && runner.arch == 'ARM64' # Hacky trick 
+      if: startsWith(runner.os, 'macOS') && ( (matrix.artifact_name && contains(matrix.artifact_name, 'x64')) || (!matrix.artifact_name && runner.arch == 'ARM64') ) # Hacky Trick. 何故かARM64の場合はX86_64をインストールしないとOpenVINOにインストールされてない判定になる。
       shell: bash
       run: |
         curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
@@ -38,7 +37,7 @@ runs:
         echo "OPENVINO_INSTALL_DIR=$HOME/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64" >> "$GITHUB_ENV"
 
     - name: Install OpenVINO (macOS - ARM64)
-      if: startsWith(runner.os, 'macOS') && runner.arch == 'X64' # Hacky trick 
+      if: startsWith(runner.os, 'macOS') && ( (matrix.artifact_name && contains(matrix.artifact_name, 'arm64')) || (!matrix.artifact_name && runner.arch == 'X64') ) # Hacky Trick.
       shell: bash
       run: |
         curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_arm64.tgz

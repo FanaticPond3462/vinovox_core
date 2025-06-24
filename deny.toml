@@ -1,7 +1,6 @@
 [graph]
 targets = [
     { triple = "x86_64-pc-windows-msvc" },
-    { triple = "i686-pc-windows-msvc" },
     { triple = "x86_64-unknown-linux-gnu" },
     { triple = "aarch64-unknown-linux-gnu" },
     { triple = "aarch64-linux-android" },
@@ -22,6 +21,7 @@ allow-build-scripts = [
     # FIXME: build/main.rsのような場所に置かれていると駄目なのか、`bypass`からは認識してくれない
     # SHA256: b4dd86261a70df757efa53f06ce7543a4dc9c51178b9b023c92069fddee97a29
     { name = "typenum", version = "1" }, # https://docs.rs/crate/typenum/1.15.0/source/build/main.rs
+    { name = "openvino-sys" },
 ]
 bypass = [
     { name = "ahash", version = "0.8", build-script = "23cbf4cf1b742e2c4da8bc58d06d1d021479dec80cec6a0bc3704c7172e2864a" }, # https://docs.rs/crate/ahash/0.8.1/source/build.rs
