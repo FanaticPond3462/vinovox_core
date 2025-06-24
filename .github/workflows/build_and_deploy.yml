@@ -108,33 +108,6 @@ jobs:
               "python_whl": true,
               "java": true,
               "can_skip_in_simple_test": true
-            },
-            {
-              "os": "macos-13",
-              "target": "aarch64-apple-ios",
-              "artifact_name": "ios-arm64-cpu",
-              "c_release_format": "ios-xcframework",
-              "python_whl": false,
-              "java": false,
-              "can_skip_in_simple_test": true
-            },
-            {
-              "os": "macos-13",
-              "target": "aarch64-apple-ios-sim",
-              "artifact_name": "ios-arm64-cpu-sim",
-              "c_release_format": "ios-xcframework",
-              "python_whl": false,
-              "java": false,
-              "can_skip_in_simple_test": true
-            },
-            {
-              "os": "macos-13",
-              "target": "x86_64-apple-ios",
-              "artifact_name": "ios-x64-cpu",
-              "c_release_format": "ios-xcframework",
-              "python_whl": false,
-              "java": false,
-              "can_skip_in_simple_test": true
             }
           ]'
 
