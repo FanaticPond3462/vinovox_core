@@ -29,7 +29,7 @@ runs:
         echo "OPENVINO_INSTALL_DIR=$HOME/l_openvino_toolkit_ubuntu20_2024.3.0.16041.1e3b88e4e3f_arm64" >> "$GITHUB_ENV"
 
     - name: Install OpenVINO (macOS - x64)
-      if: startsWith(runner.os, 'macOS') && ( (matrix.artifact_name && contains(matrix.artifact_name, 'x64')) || (!matrix.artifact_name && runner.arch == 'X64') )
+      if: startsWith(runner.os, 'macOS') && ( (matrix.artifact_name && contains(matrix.artifact_name, 'x64')) || (!matrix.artifact_name && runner.arch == 'ARM64') ) # Hacky Trick. 何故かARM64の場合はX86_64をインストールしないとOpenVINOにインストールされてない判定になる。
       shell: bash
       run: |
         curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64.tgz
@@ -37,7 +37,7 @@ runs:
         echo "OPENVINO_INSTALL_DIR=$HOME/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_x86_64" >> "$GITHUB_ENV"
 
     - name: Install OpenVINO (macOS - ARM64)
-      if: startsWith(runner.os, 'macOS') && ( (matrix.artifact_name && contains(matrix.artifact_name, 'arm64')) || (!matrix.artifact_name && runner.arch == 'ARM64') )
+      if: startsWith(runner.os, 'macOS') && ( (matrix.artifact_name && contains(matrix.artifact_name, 'arm64')) || (!matrix.artifact_name && runner.arch == 'X64') ) # Hacky Trick.
       shell: bash
       run: |
         curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.3/macos/m_openvino_toolkit_macos_12_6_2024.3.0.16041.1e3b88e4e3f_arm64.tgz
