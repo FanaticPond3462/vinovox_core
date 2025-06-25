@@ -131,6 +131,3 @@ opt-level = "z"
 lto = true
 codegen-units = 1
 strip = true
-
-[bans.build]
-allow-build-scripts = [{ name = "openvino-sys" }]

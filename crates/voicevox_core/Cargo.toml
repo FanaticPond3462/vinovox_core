@@ -40,7 +40,6 @@ itertools.workspace = true
 jlabel.workspace = true
 ndarray.workspace = true
 open_jtalk.workspace = true
-openvino = "0.9.0"
 ouroboros.workspace = true
 ref-cast.workspace = true
 regex.workspace = true
@@ -53,7 +52,7 @@ tempfile.workspace = true
 thiserror.workspace = true
 tracing.workspace = true
 uuid = { workspace = true, features = ["v4", "serde"] }
-voicevox-ort = { workspace = true, features = ["download-binaries", "__init-for-voicevox"] }
+voicevox-ort = { workspace = true, features = ["download-binaries", "__init-for-voicevox", "openvino"] }
 voicevox_core_macros.workspace = true
 
 [dev-dependencies]
