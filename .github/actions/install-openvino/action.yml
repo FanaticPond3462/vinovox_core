@@ -11,7 +11,7 @@ runs:
       run: |
         curl -LO https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.1/windows/w_openvino_toolkit_windows_2024.1.0.15008.f4afc983258_x86_64.zip
         unzip w_openvino_toolkit_windows_2024.1.0.15008.f4afc983258_x86_64.zip -d "$HOME"
-        echo "OPENVINO_INSTALL_DIR=$HOME/w_openvino_toolkit_windows_2024.3.0.16041.1e3b88e4e3f_x86_64" >> "$GITHUB_ENV"
+        echo "OPENVINO_INSTALL_DIR=$HOME/w_openvino_toolkit_windows_2024.1.0.15008.f4afc983258_x86_64" >> "$GITHUB_ENV"
 
     - name: Install OpenVINO (Ubuntu - x64)
       if: startsWith(runner.os, 'Linux') && runner.arch == 'X64'
