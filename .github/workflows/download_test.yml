@@ -46,17 +46,6 @@ jobs:
             # https://github.com/VOICEVOX/voicevox_core/pull/411#issuecomment-1412457592
             check_not_exists_items: |
               additional_libraries/
-          - name: CpuArch指定
-            os: windows-latest
-            download_command: cargo run -v -p downloader -- --cpu-arch x86
-            download_dir: voicevox_core
-            check_items: |
-              c_api/lib/voicevox_core.dll
-              models/README.txt
-              dict/open_jtalk_dic_utf_8-1.11
-              c_api/README.txt
-            check_not_exists_items: |
-              additional_libraries/
           - name: output先指定ダウンロード
             os: windows-latest
             download_command: cargo run -v -p downloader -- -o other_output

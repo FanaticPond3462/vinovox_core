@@ -363,7 +363,6 @@ jobs:
           # desktop
           clean_dlls
           copy_dll windows-x64 windows-x64
-          copy_dll windows-x86 windows-x86
           copy_dll linux-x64 linux-x64
           copy_dll linux-arm64 linux-arm64
           copy_dll osx-x64 macos-x64
